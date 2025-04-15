@@ -1,0 +1,4 @@
+indent = 4
+margin = 86
+remove_extra_newlines = true
+format_docstrings = true

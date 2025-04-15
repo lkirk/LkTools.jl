@@ -1,0 +1,16 @@
+name = "LkTools"
+uuid = "4f884348-a889-4dd8-9218-523f55117b96"
+authors = ["lkirk <kirklloyd@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+SixelTerm = "65edfddc-f399-4499-8369-a1bd38eee2ea"
+
+[compat]
+CSV = "0.10.15"
+CairoMakie = "0.13.2"
+DataFrames = "1.7.0"
+SixelTerm = "1.3.0"
