@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -euo pipefail
+
+compile-sysimage --precomp-exec ./scripts/precomp/lktools.jl --soname LkTools --exclude SixelTerm --project ~/repo/LkTools.jl
+compile-sysimage --precomp-exec ./scripts/precomp/eglot-jl.jl --soname EglotJl --project ~/repo/.emacs.d/elpaca/builds/eglot-jl
+compile-sysimage --precomp-exec ./scripts/precomp/JuliaSnail.jl --soname JuliaSnail --project ~/repo/.emacs.d/elpaca/builds/julia-snail/
