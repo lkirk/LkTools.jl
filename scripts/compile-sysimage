@@ -1,0 +1,5 @@
+#!/bin/sh
+
+SCRIPT_DIR="$(dirname "$(readlink -f -- "$0")")"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+JULIA_PROJECT="$PROJECT_ROOT" julia --threads=auto,auto --startup-file=no "$SCRIPT_DIR/compile-sysimage.jl" "$@"
