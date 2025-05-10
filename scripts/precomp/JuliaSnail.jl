@@ -806,18 +806,18 @@ end
 
 ### --- extras: support for extending Snail
 
-# module Extensions
+module Extensions
 
-# """
-# Load an extension located in the "extensions" directory. Note that the extension
-# will load in the context of the JuliaSnail.Extensions module.
-# """
-# function load(path)
-#    f = Base.Filesystem.joinpath([@__DIR__, "extensions", path...]...)
-#    include(f)
-# end
+"""
+Load an extension located in the "extensions" directory. Note that the extension
+will load in the context of the JuliaSnail.Extensions module.
+"""
+function load(path)
+   f = Base.Filesystem.joinpath([@__DIR__, "extensions", path...]...)
+   include(f)
+end
 
-# end
+end
 
 
 ### --- task handling code
