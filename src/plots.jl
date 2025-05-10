@@ -1,22 +1,36 @@
 using CairoMakie
 
+using CairoMakie: CairoGlyph
 function __init__()
     # # Makie look and feel (latex fonts, reduce padding, scale size by .7
     # set_theme!(theme_latexfonts(), figure_padding=5, size=(600, 450) .* 0.70)
     # CairoMakie.activate!(type="svg", pdf_version="1.5")
     isdefined(Main, :SixelTerm) && println("Using Sixel Scaling")
-    init_scaling_config(; scale=isdefined(Main, :SixelTerm) ? 0.7 : 1)
+    init_scaling_config(; scale = isdefined(Main, :SixelTerm) ? 0.7 : 1)
 end
 
 function init_scaling_config(;
-    dpi=96, size=(6.4, 4.8), figure_padding=5, type="svg",
-    pdf_version="1.5", theme=theme_latexfonts, fontsize=11, scale=1,
+    dpi = 96,
+    size = (6.4, 4.8),
+    figure_padding = 5,
+    type = "svg",
+    pdf_version = "1.5",
+    theme = theme_latexfonts,
+    fontsize = 11,
+    scale = 1,
 )
     # size is in inches
     pt = dpi / 72  # 1pt = 1px when dpi=72
-    set_theme!(theme(), figure_padding=figure_padding, size=size .* (scale * dpi), fontsize=fontsize * pt)
+    set_theme!(
+        theme(),
+        figure_padding = figure_padding,
+        size = size .* (scale * dpi),
+        fontsize = fontsize * pt,
+    )
     # set_theme!(theme(), figure_padding=figure_padding, size=size .* (scale * dpi), fontsize=fontsize * scale * pt)
-    CairoMakie.activate!(type=type, pdf_version=pdf_version, px_per_unit=1)
+    # Disable png plots
+    CairoMakie.activate!(type = type, pdf_version = pdf_version, px_per_unit = 1)
+    push!(CairoMakie.DISABLED_MIMES, "image/png")
 end
 
 function plot_to_file(fig, filename; options...)
@@ -55,16 +69,16 @@ function axmat(
     ncols::Int,
     nplots::Int,
     f::Makie.Figure;
-    return_idx::Bool=false,
-    hide::Bool=false,
-    hidex::Bool=false,
-    hidey::Bool=false,
-    link::Bool=false,
-    linkx::Bool=false,
-    linky::Bool=false,
-    square::Bool=false,
-    rowgap::Union{Float64,Nothing}=nothing,
-    colgap::Union{Float64,Nothing}=nothing,
+    return_idx::Bool = false,
+    hide::Bool = false,
+    hidex::Bool = false,
+    hidey::Bool = false,
+    link::Bool = false,
+    linkx::Bool = false,
+    linky::Bool = false,
+    square::Bool = false,
+    rowgap::Union{Float64,Nothing} = nothing,
+    colgap::Union{Float64,Nothing} = nothing,
     ax_kwargs...,
 )
     idx = permutedims(reshape(1:nplots, ncols, :))
@@ -74,8 +88,9 @@ function axmat(
     end
     (link || linkx) && linkxaxes!(axes...)
     (link || linky) && linkyaxes!(axes...)
-    (hide || hidex) && map(ax -> hidexdecorations!(ax; grid=false), axes[1:end-1, :])
-    (hide || hidey) && map(ax -> hideydecorations!(ax; grid=false), axes[:, 2:end])
+    (hide || hidex) &&
+        map(ax -> hidexdecorations!(ax; grid = false), axes[1:end-1, :])
+    (hide || hidey) && map(ax -> hideydecorations!(ax; grid = false), axes[:, 2:end])
     square && map(i -> rowsize!(f.layout, i, Aspect(1, 1.0)), 1:size(axes, 1))
     !isnothing(rowgap) && rowgap!(f.layout, rowgap)
     !isnothing(colgap) && colgap!(f.layout, colgap)
@@ -96,7 +111,7 @@ value does not matter and is discarded
 $(common_kwargs)
 """
 function axforeach(ncols::Int, nplots::Int, f::Makie.Figure, fn::Function; kwargs...)
-    idx, f, axes = axmat(ncols, nplots, f; return_idx=true, kwargs...)
+    idx, f, axes = axmat(ncols, nplots, f; return_idx = true, kwargs...)
     map((i, ax) -> fn(i, ax), idx, axes)
     :square ∈ keys(kwargs) && kwargs[:square] && resize_to_layout!(f)
     (f, axes)
