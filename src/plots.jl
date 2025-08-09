@@ -29,9 +29,14 @@ function init_scaling_config(;
     )
     # set_theme!(theme(), figure_padding=figure_padding, size=size .* (scale * dpi), fontsize=fontsize * scale * pt)
     # visible = false so an image viewer does not pop up
-    CairoMakie.activate!(type = type, pdf_version = pdf_version, px_per_unit = 1, visible = false)
+    CairoMakie.activate!(
+        type = type,
+        pdf_version = pdf_version,
+        px_per_unit = 1,
+        visible = false,
+    )
     # Disable png plots
-    push!(CairoMakie.DISABLED_MIMES, "image/png")
+    # push!(CairoMakie.DISABLED_MIMES, "image/png")
 end
 
 function plot_to_file(fig, filename; options...)
