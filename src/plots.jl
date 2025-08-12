@@ -5,8 +5,9 @@ function __init__()
     # # Makie look and feel (latex fonts, reduce padding, scale size by .7
     # set_theme!(theme_latexfonts(), figure_padding=5, size=(600, 450) .* 0.70)
     # CairoMakie.activate!(type="svg", pdf_version="1.5")
-    isdefined(Main, :SixelTerm) && println("Using Sixel Scaling")
-    init_scaling_config(; scale = isdefined(Main, :SixelTerm) ? 0.7 : 1)
+    # isdefined(Main, :SixelTerm) && println("Using Sixel Scaling")
+    # init_scaling_config(; scale = isdefined(Main, :SixelTerm) ? 0.7 : 1)
+    init_scaling_config()
 end
 
 function init_scaling_config(;
