@@ -5,4 +5,4 @@ set -e
 SCRIPT_DIR="$(dirname "$(readlink -f -- "$0")")"
 "$SCRIPT_DIR/compile-sysimage" --precomp-exec ./scripts/precomp/lktools.jl --soname LkTools --exclude SixelTerm --project ~/repo/LkTools.jl
 "$SCRIPT_DIR/compile-sysimage" --precomp-exec ./scripts/precomp/eglot-jl.jl --soname EglotJl --project ~/repo/.emacs.d/elpaca/builds/eglot-jl
-"$SCRIPT_DIR/compile-sysimage" --precomp-exec ./scripts/precomp/JuliaSnail.jl --soname JuliaSnail --project ~/repo/.emacs.d/elpaca/builds/julia-snail/
+#"$SCRIPT_DIR/compile-sysimage" --precomp-exec ./scripts/precomp/JuliaSnail.jl --soname JuliaSnail --project ~/repo/.emacs.d/elpaca/builds/julia-snail/
