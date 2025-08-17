@@ -40,7 +40,8 @@ function init_scaling_config(;
     # push!(CairoMakie.DISABLED_MIMES, "image/png")
 end
 
-function plot_to_file(fig, filename; options...)
+function plot_to_file(fig, filename; rm_orig = false, options...)
+    rm_orig && rm(filename; force = true)
     mkpath(dirname(filename))
     save(filename, fig; options)
 end
@@ -156,6 +157,9 @@ function update_axis!(ax::Makie.Axis; kwargs...)
         setproperty!(ax, k, v)
     end
 end
+
+# update labels
+# fig.content[1].scene.plots[1].attributes
 
 # meh... series?
 # function multilines(f::Makie.Figure, x, y; label=nothing)
